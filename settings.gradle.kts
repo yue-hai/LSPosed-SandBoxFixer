@@ -16,6 +16,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // 在这里添加下面这行，告诉Gradle去哪里找Xposed API
+        maven { url = uri("https://api.xposed.info/") }
     }
 }
 

@@ -53,4 +53,7 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    
+    // 告诉编译器，LSPosed框架会在运行时提供这些API，所以不需要打包进我们的APK
+    compileOnly("de.robv.android.xposed:api:82")
 }
