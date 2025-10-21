@@ -1,0 +1,72 @@
+[versions]
+# 插件
+agp = "8.10.1"
+kotlin = "2.1.0"
+
+# 安卓核心、语言扩展
+coreKtx = "1.16.0"
+lifecycleRuntimeKtx = "2.9.2"
+activity-compose = "1.8.2"
+# Jetpack Compose 版本管理 BOM
+composeBom = "2024.09.00"
+
+# 网络请求
+#okhttp = "4.10.0"
+#retrofit = "2.9.0"
+
+# 测试相关
+junit = "4.13.2"
+androidxJunit = "1.1.5"
+
+# xposed 版本
+xposedApi = "82"
+
+[plugins]
+#  Android 应用程序插件，用于将所有代码和资源打包成最终的 APK
+android-application = { id = "com.android.application", version.ref = "agp" }
+# Kotlin Android 插件，让 Gradle 能够理解和编译 Kotlin 代码（.kt 文件），并将其与 Android 框架正确集成
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+# Kotlin Compose 插件，启用 Jetpack Compose 框架的编译器插件
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+[libraries]
+# 为 Android 框架和支持库提供 Kotlin 扩展。它包括一些扩展函数，用于简化新 Android 组件的创建和现有组件的处理
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+# 提供了一些 Kotlin 扩展方法，LiveData、ViewModel、Lifecycle、协程、lifecycleScope 等
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+# implementation("androidx.activity:activity-compose:1.8.0"): 提供了 Activity 与 Compose 交互的桥梁，最主要的就是 setContent { ... } 函数
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
+
+# Jetpack Compose 的 Bill of Materials (BOM)，用于统一管理所有 Compose 库的版本，确保它们彼此兼容
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+# Compose UI 核心库，包含 Modifier、布局 (Layout)、绘制 (Drawing) 等基础功能
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+# Compose 的图形处理库，提供了如图形、颜色 (Color)、画笔 (Brush) 等 API
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+# 用于在 Android Studio 中启用 @Preview 可组合项的实时预览功能
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+# 实现了 Material Design 3 (M3) 设计语言的 UI 组件库 (Button, TextField, Scaffold 等)
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+
+# okhttp 是 android 平台使用最广泛的第三方网络框架，okhttp 做了很多网络优化，功能也很强大
+#okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+## 日志拦截器依赖
+#okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+## retrofit 是一个网络请求框架，基于 okhttp，使用简单，功能强大
+#retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+## retrofit 的 gson 转换器，用于解析 json 数据
+#retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+
+# JUnit 4，用于运行本地单元测试 (testImplementation)
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+# 用于在 Android 设备上运行仪器化测试 (androidTestImplementation) 的 JUnit 扩展
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunit" }
+# 用于对 Jetpack Compose UI 进行仪器化测试 (androidTestImplementation) 的框架
+androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+# 用于在 Debug 构建中检查 Compose UI 的高级工具 (例如布局检查器)
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+# 用于帮助 Android Studio 发现和运行 Compose 测试的清单文件 (debugImplementation)
+androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+
+# Xposed / LSPosed 框架的 API，使用 compileOnly 告知编译器在运行时提供
+xposed-api = { group = "de.robv.android.xposed", name = "api", version.ref = "xposedApi" }

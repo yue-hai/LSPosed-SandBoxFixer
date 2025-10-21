@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="xposed_scope">
+        <!-- 起点读书 -->
+        <item>com.qidian.QDReader</item>
+
+        <!-- 支付宝 -->
+        <item>com.eg.android.AlipayGphone</item>
+        <!-- 淘宝 -->
+        <item>com.taobao.taobao</item>
+        <!-- 阿里巴巴 -->
+        <item>com.alibaba.wireless</item>
+    </string-array>
+</resources>

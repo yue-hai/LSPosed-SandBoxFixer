@@ -3,32 +3,67 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--
+        定义所有应用级别的元数据
+        label：指定 App 在手机屏幕上显示的名称
+        icon：指定 App 在手机屏幕上显示的图标
+        roundIcon：指定 App 的圆角图标
+        theme：指定 App 的显示风格
+        allowBackup：是否允许允许用户备份系统应用和第三方应用的 apk 安装包和应用数据，以便在刷机或者数据丢失后恢复应用，用户即可通过 adb backup 和 adb restore 来进行对应用数据的备份和恢复。
+        dataExtractionRules：指定数据提取规则的 XML 资源文件，用于定义应用数据的提取和备份策略
+        fullBackupContent：指定完整备份内容的 XML 资源文件，用于定义应用数据的备份和恢复规则
+        targetApi：指定这个应用是针对哪个特定 API 进行开发的
+    -->
     <application
+        android:label="@string/app_name"
+        android:icon="@drawable/app_icon"
+        android:roundIcon="@drawable/app_icon"
+        android:theme="@style/Theme.SandBoxFixer"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.SandBoxFixer"
-        tools:targetApi="31">
+        tools:targetApi="35">
+
+        <!--
+            注册主窗口
+            name：指定 Activity 的类名
+            exported：指定 Activity 是否可以被其他应用程序启动
+            theme：指定 Activity 的显示风格
+        -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.SandBoxFixer">
+            <!-- 配置为主窗口 -->
             <intent-filter>
+                <!-- android.intent.action.MAIN 表示这个 Activity 是一个启动 Activity -->
                 <action android:name="android.intent.action.MAIN"/>
-
+                <!-- android.intent.category.LAUNCHER 表示这个 Activity 是一个启动 Activity -->
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
+        <!-- 模块标识：告诉 LSPosed 框架这个 APK 是一个 Xposed 模块。如果 value 不是 true 或者这个标签不存在，LSPosed 将完全忽略这个应用 -->
         <meta-data
             android:name="xposedmodule"
             android:value="true" />
+
+        <!-- 模块作用域：指定模块应该在哪些应用程序中被激活。LSPosed 只会把模块注入到这个数组列表里包含的应用包名中 -->
+        <meta-data
+            android:name="xposedscope"
+            android:resource="@array/xposed_scope" />
+
+        <!-- Hook 入口类：明确告诉 LSPosed 框架，当激活模块时应该加载哪个类 -->
+        <meta-data
+            android:name="xposedentry"
+            android:value="com.yuehai.sandboxfixer.hook.HookEntry" />
+
+        <!-- 功能描述：这个文本会显示在 LSPosed 管理器的模块列表界面的模块名称下面。它一般用来向用户解释这个模块是做什么用的 -->
         <meta-data
             android:name="xposeddescription"
             android:value="修复沙盒环境中的应用程序崩溃问题" />
+
+        <!-- 最低 LSPosed 版本：指定这个模块需要的最低 LSPosed 框架版本。如果用户的 LSPosed 版本低于这个值，模块将不会被激活 -->
         <meta-data
             android:name="xposedminversion"
             android:value="82" />

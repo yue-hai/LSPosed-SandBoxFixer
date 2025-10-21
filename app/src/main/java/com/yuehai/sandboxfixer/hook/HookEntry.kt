@@ -1,4 +1,4 @@
-package com.yuehai.sandboxfixer
+package com.yuehai.sandboxfixer.hook
 
 import android.content.BroadcastReceiver
 import android.content.Context
